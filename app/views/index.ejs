@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Cursos</title>
+
+</head>
+
+<body>
+    <h1>Cursos</h1>
+    <ul>
+        <% for(var i=0; i<cursos.length; i++) {%>
+            <li>
+                <%= cursos[i].nome %> - <%= cursos[i].categoria %>
+            </li>
+            <% } %>
+    </ul>
+
+    <form onsubmit="createCurse(event)">
+        <input type="text" id="nome" placeholder="Nome" autofocus/>
+        <input type="text" id="categoria" placeholder="Categoria"/>
+        <input type="submit" value="Criar"/>
+    </form>
+</body>
+<script>
+    function createCurse(event){
+        event.preventDefault();
+        let nome = document.querySelector('#nome').value,
+            categoria = document.querySelector('#categoria').value;
+        fetch('/', {
+            method:'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({nome, categoria})
+            
+        })
+            .then(res => res.json())
+            .then(() => {location.reload()})
+            .catch(()=> {
+                console.error('Houve um erro.');
+            })
+    }
+
+</script>
+
+</html>
