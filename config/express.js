@@ -2,11 +2,10 @@ let express = require('express');
 let load  = require('express-load');
 let bodyParser = require('body-parser');
 
-
 module.exports = ()=>{    
     let app = express();
 
-    app.set('port', 3000);
+    app.set('port', process.env.PORT);
     
     //app.use(express.static('./public'));
     app.use(bodyParser.json());

@@ -13,6 +13,7 @@
         <% for(var i=0; i<cursos.length; i++) {%>
             <li>
                 <%= cursos[i].nome %> - <%= cursos[i].categoria %>
+                <button onclick="removeCourse('<%= cursos[i]._id %>')">X</button>
             </li>
             <% } %>
     </ul>
@@ -36,6 +37,21 @@
             },
             body: JSON.stringify({nome, categoria})
             
+        })
+            .then(res => res.json())
+            .then(() => {location.reload()})
+            .catch(()=> {
+                console.error('Houve um erro.');
+            })
+    }
+
+    function removeCourse(id){
+        fetch(`/remove/${id}`, {
+            method:'delete',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }            
         })
             .then(res => res.json())
             .then(() => {location.reload()})

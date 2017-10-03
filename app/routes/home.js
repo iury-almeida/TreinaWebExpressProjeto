@@ -3,4 +3,6 @@ module.exports = (app)=>{
 
     app.get('/', controllers.index);
     app.post('/', controllers.newItem);
+
+    app.delete('/remove/:id',  controllers.remove);
 }
